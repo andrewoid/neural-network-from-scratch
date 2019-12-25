@@ -1,0 +1,44 @@
+{
+  "layers": [
+    {
+      "neurons": [
+        {
+          "index" : 0,
+          "weights" : [0.3, 0.4],
+          "bias" : 0.4,
+          "value" : 0,
+          "derivative" : 0,
+          "error" : 0
+        },
+        {
+          "index" : 0,
+          "weights" : [0.3, 0.4],
+          "bias" : 0.4,
+          "value" : 0,
+          "derivative" : 0,
+          "error" : 0
+        }
+      ]
+    },
+    {
+      "neurons": [
+        {
+          "index" : 0,
+          "weights" : [0.3, 0.4],
+          "bias" : 0.4,
+          "value" : 0,
+          "derivative" : 0,
+          "error" : 0
+        },
+        {
+          "index" : 0,
+          "weights" : [0.3, 0.4],
+          "bias" : 0.4,
+          "value" : 0,
+          "derivative" : 0,
+          "error" : 0
+        }
+      ]
+    }
+  ]
+}

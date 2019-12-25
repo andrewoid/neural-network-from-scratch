@@ -40,6 +40,20 @@ public class Neuron {
         bias = randomInBounds(BIAS_LOWER, BIAS_UPPER);
     }
 
+    public Neuron(int index, Neuron[] previousLayer, Neuron[] nextLayer, double[] weights,
+                  double bias, double value, double derivative, double error)
+    {
+        this.index = index;
+        this.previousLayer = previousLayer;
+        this.nextLayer = nextLayer;
+
+        this.weights = weights;
+        this.bias = bias;
+        this.value = value;
+        this.derivative = derivative;
+        this.error = error;
+    }
+
     /**
      * @param value
      * @return the sigmoid of the specified value

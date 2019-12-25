@@ -10,6 +10,11 @@ public class Network {
 
     private final Neuron layers[][];
 
+    public Neuron[][] getLayers()
+    {
+        return layers;
+    }
+
     /**
      * Construct a neural network with layers and different number of Neurons per layer
      *
@@ -33,6 +38,11 @@ public class Network {
             }
             layers[i] = layer;
         }
+    }
+
+    public Network(Neuron[][] layers)
+    {
+        this.layers = layers;
     }
 
     public static String toString(Neuron layer[], double threshold) {
