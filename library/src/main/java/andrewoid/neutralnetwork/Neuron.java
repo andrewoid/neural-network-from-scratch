@@ -57,25 +57,10 @@ public class Neuron {
         return Math.random() * (upper - lower) + lower;
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
     /**
      * @param index
      * @return the weights of the connection from the previous layer
      */
-    public double getWeight(int index) {
-        return weights[index];
-    }
-
-    public double getError() {
-        return error;
-    }
 
     /**
      * Computer the value of this andrewoid.neutralnetwork.Neuron given the previousLayer and weights.
@@ -131,5 +116,23 @@ public class Neuron {
         return String.valueOf(value);
     }
 
+    public void setValue(double value) {
+        this.value = value;
+    }
 
+    public double getValue() {
+        return value;
+    }
+
+    public double getWeight(int index) {
+        return weights[index];
+    }
+
+    public double getError() { return error; }
+
+    public double[] getWeights() { return weights; }
+
+    public double getBias() { return bias; }
+
+    public double getDerivative() { return derivative; }
 }
