@@ -8,7 +8,11 @@ import java.util.stream.Collectors;
  */
 public class Network {
 
-     final Neuron layers[][];
+    public Neuron[][] getLayers() {
+        return layers;
+    }
+
+    private final Neuron layers[][];
 
     /**
      * Construct a neural network with layers and different number of Neurons per layer

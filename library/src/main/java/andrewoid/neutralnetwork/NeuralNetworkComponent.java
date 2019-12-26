@@ -22,11 +22,11 @@ Color[] colors = {Color.RED,Color.ORANGE,Color.YELLOW, Color.GREEN, Color.BLUE,C
         int neuronValue;
         int pathWeight;
         Color pathColor = Color.BLACK;
-        for (int i = 0;i <network.layers.length; i ++){
-            for ( int j = 0; j<network.layers[i].length; j ++ )
+        for (int i = 0;i <network.getLayers().length; i ++){
+            for ( int j = 0; j<network.getLayers()[i].length; j ++ )
 
             {
-             neuronValue = (int) network.layers[i][j].getValue();
+             neuronValue = (int) network.getLayers()[i][j].getValue();
              neuronColor = colors[neuronValue] ;
              drawNeuron(i,j, neuronColor, g);
 //
