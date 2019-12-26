@@ -7,12 +7,20 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 public class IdxReader
 {
 
-    public static String inputImagePath;
-    public static String inputLabelPath;
-    public static String outputPath;
+    private String inputImagePath;
+    private String inputLabelPath;
+    private String outputPath;
+    private FileInputStream inImage = null;
+    private FileInputStream inLabel = null;
+    private int magicNumberImages, numberOfImages, numberOfRows,
+            numberOfColumns, magicNumberLabels,
+            numberOfLabels, numberOfPixels;
+    private BufferedImage image;
+    private int[] imgPixels;
 
     public IdxReader(String inputImagePath, String inputLabelPath, String outputPath)
     {
@@ -21,37 +29,24 @@ public class IdxReader
         this.outputPath = outputPath;
     }
 
+    /*
+    * Resource I utilized to decompress the files:
+    * https://stackoverflow.com/questions/17279049/reading-a-idx-file-type-in-java
+    * */
     public void loadFromCompressedFilesToOutputDir() {
-        FileInputStream inImage = null;
-        FileInputStream inLabel = null;
+
 
         if(!pathExist(outputPath)) { createOutputDirectories(outputPath); }
         else {
             /* Simplistic check -- If anything is in here, don't want to reload*/
-            if(new File(outputPath + "0").list().length > 0)
-            {
-                return;
-            }
+            if(new File(outputPath + "0").list().length > 0) { return; }
         }
 
         int[] hashMap = new int[10];
 
         try
         {
-            inImage = new FileInputStream(inputImagePath);
-            inLabel = new FileInputStream(inputLabelPath);
-
-            int magicNumberImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
-            int numberOfImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
-            int numberOfRows  = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
-            int numberOfColumns = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
-
-            int magicNumberLabels = (inLabel.read() << 24) | (inLabel.read() << 16) | (inLabel.read() << 8) | (inLabel.read());
-            int numberOfLabels = (inLabel.read() << 24) | (inLabel.read() << 16) | (inLabel.read() << 8) | (inLabel.read());
-
-            BufferedImage image = new BufferedImage(numberOfColumns, numberOfRows, BufferedImage.TYPE_INT_ARGB);
-            int numberOfPixels = numberOfRows * numberOfColumns;
-            int[] imgPixels = new int[numberOfPixels];
+            initializeVariables();
 
             for(int i = 0; i < numberOfImages; i++) {
 
@@ -77,20 +72,46 @@ public class IdxReader
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (inImage != null) {
-                try {
-                    inImage.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            closeFileStreams();
+        }
+    }
+
+    private void closeFileStreams() {
+        if (inImage != null) {
+            try {
+                inImage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            if (inLabel != null) {
-                try {
-                    inLabel.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        }
+        if (inLabel != null) {
+            try {
+                inLabel.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+    }
+
+    private void initializeVariables() {
+        try {
+
+            inImage = new FileInputStream(inputImagePath);
+            inLabel = new FileInputStream(inputLabelPath);
+
+            magicNumberImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
+            numberOfImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
+            numberOfRows = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
+            numberOfColumns = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
+
+            magicNumberLabels = (inLabel.read() << 24) | (inLabel.read() << 16) | (inLabel.read() << 8) | (inLabel.read());
+            numberOfLabels = (inLabel.read() << 24) | (inLabel.read() << 16) | (inLabel.read() << 8) | (inLabel.read());
+
+            image = new BufferedImage(numberOfColumns, numberOfRows, BufferedImage.TYPE_INT_ARGB);
+            numberOfPixels = numberOfRows * numberOfColumns;
+            imgPixels = new int[numberOfPixels];
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

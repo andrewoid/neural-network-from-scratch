@@ -51,15 +51,8 @@ public class CalculatorNetworkTraining {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 9
     };
 
-    public static final String inputImagePath = "train-images-idx3-ubyte";
-    public static final String inputLabelPath = "train-labels-idx1-ubyte";
-    public static final String outputPath = "MNISTOutputFiles/";
-
     public static void main(String args[])
     {
-
-        IdxReader reader = new IdxReader(inputImagePath,inputLabelPath,outputPath);
-        reader.loadFromCompressedFilesToOutputDir();
         Network network = new Network(7, 15, 15, 10);
         Neuron outputs[];
         Random random = new Random();
