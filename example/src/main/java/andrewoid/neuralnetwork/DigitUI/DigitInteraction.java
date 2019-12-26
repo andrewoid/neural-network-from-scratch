@@ -1,8 +1,7 @@
-package andrewoid.neuralnetwork;
+package andrewoid.neuralnetwork.DigitUI;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
-import andrewoid.neutralnetwork.DigitFrame;
 
 import java.util.Random;
 

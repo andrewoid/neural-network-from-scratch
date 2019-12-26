@@ -1,4 +1,7 @@
-package andrewoid.neutralnetwork;
+package andrewoid.neuralnetwork.DigitUI;
+
+import andrewoid.neutralnetwork.Network;
+import andrewoid.neutralnetwork.Neuron;
 
 import javax.swing.*;
 
