@@ -26,7 +26,7 @@ public class DigitInteraction {
                 {1, 1, 1, 1, 0, 1, 0}, // 9
         };
 
-        double expectedOutputs[][] = new double[][]{
+        double expectedOutputs[][] = new double[][] {
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
                 {0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
                 {0, 0, 1, 0, 0, 0, 0, 0, 0, 0}, // 2
