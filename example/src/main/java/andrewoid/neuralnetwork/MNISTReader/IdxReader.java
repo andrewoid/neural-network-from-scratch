@@ -7,17 +7,32 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class IdxReader {
+public class IdxReader
+{
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+    public static String inputImagePath;
+    public static String inputLabelPath;
+    public static String outputPath;
+
+    public IdxReader(String inputImagePath, String inputLabelPath, String outputPath)
+    {
+        this.inputImagePath = inputImagePath;
+        this.inputLabelPath = inputLabelPath;
+        this.outputPath = outputPath;
+    }
+
+    public void loadFromCompressedFilesToOutputDir() {
         FileInputStream inImage = null;
         FileInputStream inLabel = null;
 
-        String inputImagePath = "train-images-idx3-ubyte";
-        String inputLabelPath = "train-labels-idx1-ubyte";
-
-        String outputPath = "MNISTOutputFiles/";
+        if(!pathExist(outputPath)) { createOutputDirectories(outputPath); }
+        else {
+            /* Simplistic check -- If anything is in here, don't want to reload*/
+            if(new File(outputPath + "0").list().length > 0)
+            {
+                return;
+            }
+        }
 
         int[] hashMap = new int[10];
 
@@ -52,23 +67,20 @@ public class IdxReader {
                 int label = inLabel.read();
 
                 hashMap[label]++;
-                File outputfile = new File(outputPath + label + "_0" + hashMap[label] + ".png");
+                File outputfile = new File(outputPath + "/" + label + "/" + hashMap[label] + ".png");
 
                 ImageIO.write(image, "png", outputfile);
             }
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             if (inImage != null) {
                 try {
                     inImage.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -76,11 +88,25 @@ public class IdxReader {
                 try {
                     inLabel.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    private void createOutputDirectories(String outputPath)
+    {
+        File outputDir = new File(outputPath);
+        outputDir.mkdir();
+        for(int ix = 0; ix < 10; ++ix)
+        {
+            new File(outputPath + "" + ix).mkdir();
+        }
+    }
+
+    private boolean pathExist(String outpath)
+    {
+        return new File(outputPath).exists();
     }
 
 }
