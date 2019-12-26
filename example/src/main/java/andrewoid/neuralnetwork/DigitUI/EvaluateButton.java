@@ -22,7 +22,7 @@ public class EvaluateButton extends JButton {
             Neuron[] outputs = network.evaluate(input);
             for (int i = 0; i < outputs.length; i++) {
                 double value = outputs[i].getValue();
-                if (value > 0.10) {
+                if (value > 0.90) {
                     result.append(i);
                     result.append(" ");
                 }
