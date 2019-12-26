@@ -5,11 +5,11 @@ import java.awt.*;
 
 
 public class NeuralNetworkComponent extends JComponent {
-int start = 25;
-int size = 10;
-int space = 50;
-Network network;
-Color[] colors = {Color.RED,Color.ORANGE,Color.YELLOW, Color.GREEN, Color.BLUE,Color.CYAN,Color.MAGENTA, Color.PINK};
+    int start = 25;
+    int size = 10;
+    int space = 50;
+    Network network;
+    Color[] colors = {Color.RED,Color.ORANGE,Color.YELLOW, Color.GREEN, Color.BLUE,Color.CYAN,Color.MAGENTA, Color.PINK};
 
     public NeuralNetworkComponent(Network network) {
         this.network = network;
