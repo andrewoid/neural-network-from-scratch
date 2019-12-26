@@ -36,8 +36,6 @@ public class NeuralNetworkComponent extends JComponent {
                 }
             }
         }
-
-
     }
 
     private void drawNeuron(int row, int column, Color color, Graphics g) {
@@ -46,18 +44,13 @@ public class NeuralNetworkComponent extends JComponent {
                 start + (column * space2),
                 size,
                 size);
-
-
     }
 
     private void drawConnection(int row, int column, int number, Color color, Graphics g) {
         g.setColor(color);
-        g.drawLine(
-
-                start + ((row - 1) * space) + size,
+        g.drawLine(start + ((row - 1) * space) + size,
                 start + (number * space2),
                 start + ((row) * space),
                 start + (column * space2));
     }
-
 }
