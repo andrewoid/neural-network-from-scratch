@@ -15,8 +15,8 @@ public class DigitFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         Digit digit = new Digit();
-        // ResultScreen resultScreen = new ResultScreen();
-        EvaluateButton evaluateButton = new EvaluateButton(network);
+        ResultScreen resultScreen = new ResultScreen();
+        EvaluateButton evaluateButton = new EvaluateButton(network, resultScreen);
         evaluateButton.addActionListener(e -> {
             EvaluateButton button = (EvaluateButton) e.getSource();
             button.evaluate(digit.getLinesStatus());
@@ -24,7 +24,7 @@ public class DigitFrame extends JFrame {
 
         JPanel root = new JPanel(new BorderLayout());
         root.add(digit, BorderLayout.CENTER);
-        // root.add(resultScreen, BorderLayout.EAST);
+        root.add(resultScreen, BorderLayout.EAST);
         root.add(evaluateButton, BorderLayout.SOUTH);
 
         setContentPane(root);
