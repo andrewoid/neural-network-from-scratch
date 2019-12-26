@@ -1,7 +1,8 @@
-package ayeletbuchen;
+package andrewoid.neuralnetwork;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
+import andrewoid.neutralnetwork.DigitFrame;
 
 import java.util.Random;
 

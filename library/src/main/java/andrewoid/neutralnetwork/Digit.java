@@ -1,4 +1,4 @@
-package ayeletbuchen;
+package andrewoid.neutralnetwork;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -101,6 +101,11 @@ public class Digit extends JPanel {
         }
     }
 
+    /**
+     *
+     * @return deep copy of the array that represents which parts of the digit are selected. The selected parts of the
+     * digit should be used by the neural network to determine which number is represented
+     */
     public double[] getLinesStatus() {
         return Arrays.copyOf(linesStatus, linesStatus.length);
     }

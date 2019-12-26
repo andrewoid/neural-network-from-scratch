@@ -1,4 +1,4 @@
-package ayeletbuchen;
+package andrewoid.neutralnetwork;
 
 import javax.swing.*;
 import java.awt.*;
