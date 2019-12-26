@@ -1,4 +1,4 @@
-package andrewoid.neuralnetwork.DigitUI;
+package andrewoid.neuralnetwork.digitUI;
 
 import javax.swing.*;
 import java.awt.*;

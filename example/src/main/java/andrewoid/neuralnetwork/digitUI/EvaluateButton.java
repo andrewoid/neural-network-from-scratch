@@ -1,4 +1,4 @@
-package andrewoid.neuralnetwork.DigitUI;
+package andrewoid.neuralnetwork.digitUI;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
