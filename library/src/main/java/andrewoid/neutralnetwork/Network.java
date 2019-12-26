@@ -1,5 +1,8 @@
 package andrewoid.neutralnetwork;
 
+import jdk.nashorn.internal.parser.JSONParser;
+
+import java.io.FileReader;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -37,6 +40,18 @@ public class Network {
                 layer[j] = new Neuron(j, previousLayer, nextLayer);
             }
             layers[i] = layer;
+        }
+    }
+
+    public void loadFromJSON(String fileName)
+    {
+        try(FileReader fileReader = new FileReader(fileName))
+        {
+            //TODO load network from the json file. How? Good question.
+        }
+        catch (Exception exc)
+        {
+            System.out.println(exc.getMessage());
         }
     }
 
