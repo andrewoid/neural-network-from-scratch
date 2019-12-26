@@ -29,6 +29,12 @@ public class IdxReader
         this.outputPath = outputPath;
     }
 
+    public void resetInputImageAndFilePath(String inputImagePath, String inputLabelPath)
+    {
+        this.inputImagePath = inputImagePath;
+        this.inputLabelPath = inputLabelPath;
+    }
+
     /*
     * Resource I utilized to decompress the files:
     * https://stackoverflow.com/questions/17279049/reading-a-idx-file-type-in-java
@@ -39,7 +45,7 @@ public class IdxReader
         if(!pathExist(outputPath)) { createOutputDirectories(outputPath); }
         else {
             /* Simplistic check -- If anything is in here, don't want to reload*/
-            if(new File(outputPath + "0").list().length > 0) { return; }
+//            if(new File(outputPath + "0").list().length > 0) { return; }
         }
 
         int[] hashMap = new int[10];
