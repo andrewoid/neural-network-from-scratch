@@ -2,7 +2,6 @@ package andrewoid.neuralnetwork.DigitUI;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
-
 import javax.swing.*;
 
 public class EvaluateButton extends JButton {

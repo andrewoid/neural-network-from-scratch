@@ -2,7 +2,6 @@ package andrewoid.neuralnetwork.DigitUI;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
-
 import java.util.Random;
 
 public class DigitInteraction {

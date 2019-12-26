@@ -1,7 +1,6 @@
 package andrewoid.neuralnetwork.DigitUI;
 
 import andrewoid.neutralnetwork.Network;
-
 import javax.swing.*;
 import java.awt.*;
 
