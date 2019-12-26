@@ -2,9 +2,7 @@ package ayeletbuchen;
 
 import andrewoid.neutralnetwork.Network;
 import andrewoid.neutralnetwork.Neuron;
-
 import javax.swing.*;
-import java.util.Arrays;
 
 public class EvaluateButton extends JButton {
 
