@@ -3,18 +3,19 @@ package ayeletbuchen;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 public class Digit extends JPanel {
 
     private final int DIGIT_LINES = 7;
-    private int[] linesStatus;
+    private double[] linesStatus;
     private final int lineLength = DigitFrame.WIDTH / 4;
     private final int lineThickness = 10;
     private final int sideMargin = (DigitFrame.WIDTH - lineLength) / 2;
     private final int topMargin = (DigitFrame.HEIGHT - (lineLength * 2)) / 2;
 
     public Digit() {
-        linesStatus = new int[DIGIT_LINES];
+        linesStatus = new double[DIGIT_LINES];
         setSize(DigitFrame.WIDTH, DigitFrame.HEIGHT);
         setLayout(null);
         createDigit();
@@ -98,5 +99,9 @@ public class Digit extends JPanel {
             });
             add(digitLine);
         }
+    }
+
+    public double[] getLinesStatus() {
+        return Arrays.copyOf(linesStatus, linesStatus.length);
     }
 }

@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class DigitLine extends JLabel {
 
-    private int status;
-    private final int OFF = 0;
-    private final int ON = 1;
+    private double status;
+    private final double OFF = 0.0;
+    private final double ON = 1.0;
     private final Color OFF_COLOR = Color.BLACK;
     private final Color ON_COLOR = Color.GREEN;
     private int id;
@@ -34,7 +34,7 @@ public class DigitLine extends JLabel {
         return id;
     }
 
-    public int getStatus() {
+    public double getStatus() {
         return status;
     }
 }
