@@ -3,4 +3,5 @@
 out/
 build/
 target/
+MNISTOutputFiles/
 neural-network-from-scratch.iml
