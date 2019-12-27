@@ -1,10 +1,12 @@
 package andrewoid.neutralnetwork;
 
-import jdk.nashorn.internal.parser.JSONParser;
-
-import java.io.FileReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
 
 /**
  * Multi layer Neural andrewoid.neutralnetwork.Network object that encapsulates evaluation and training.
@@ -43,15 +45,19 @@ public class Network {
         }
     }
 
-    public void loadFromJSON(String fileName)
+    public void saveToJSON(String fileName)
     {
-        try(FileReader fileReader = new FileReader(fileName))
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try
         {
-            //TODO load network from the json file. How? Good question.
+            FileWriter writer = new FileWriter(fileName);
+            gson.toJson(this, writer);
+            writer.flush();
+            writer.close();
         }
-        catch (Exception exc)
+        catch (IOException exc)
         {
-            System.out.println(exc.getMessage());
+            exc.printStackTrace();
         }
     }
 
@@ -123,4 +129,21 @@ public class Network {
         }
     }
 
+     void connectNeurons()
+    {
+        for (int ix = 0; ix < layers.length; ++ix)
+        {
+            for (int ij = 0; ij < layers[ix].length; ++ij)
+            {
+                if (ix > 0)
+                {
+                    layers[ix][ij].setPreviousLayer(layers[ix - 1]);
+                }
+                if (ix < layers.length - 1)
+                {
+                    layers[ix][ij].setNextLayer(layers[ix + 1]);
+                }
+            }
+        }
+    }
 }

@@ -11,8 +11,8 @@ public class Neuron {
     private static final double WEIGHT_UPPER = 0.5;
     private static final double WEIGHT_LOWER = 0.1;
     private int index;
-    private Neuron[] previousLayer;
-    private Neuron[] nextLayer;
+    private transient Neuron[] previousLayer;
+    private transient Neuron[] nextLayer;
     private double weights[];
     private double bias;
     private double value;
@@ -38,20 +38,6 @@ public class Neuron {
         }
 
         bias = randomInBounds(BIAS_LOWER, BIAS_UPPER);
-    }
-
-    public Neuron(int index, Neuron[] previousLayer, Neuron[] nextLayer, double[] weights,
-                  double bias, double value, double derivative, double error)
-    {
-        this.index = index;
-        this.previousLayer = previousLayer;
-        this.nextLayer = nextLayer;
-
-        this.weights = weights;
-        this.bias = bias;
-        this.value = value;
-        this.derivative = derivative;
-        this.error = error;
     }
 
     /**
@@ -149,4 +135,14 @@ public class Neuron {
     public double getBias() { return bias; }
 
     public double getDerivative() { return derivative; }
+
+    public void setPreviousLayer(Neuron[] previousLayer)
+    {
+        this.previousLayer = previousLayer;
+    }
+
+    public void setNextLayer(Neuron[] nextLayer)
+    {
+        this.nextLayer = nextLayer;
+    }
 }
