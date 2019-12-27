@@ -28,10 +28,5 @@ public class SimpleNetworkTraining {
         System.out.println(Arrays.toString(outputs));
 
         network.saveToJSON("network.json");
-
-        //just testing NetworkFactory's loadFromJSON() method.
-        NetworkFactory factory = new NetworkFactory();
-        Network savedNetwork = factory.loadFromJSON("network.json");
-
     }
 }
