@@ -57,10 +57,9 @@ public class Neuron {
         return Math.random() * (upper - lower) + lower;
     }
 
-    /**
-     * @param index
-     * @return the weights of the connection from the previous layer
-     */
+    public int getNumWeights() {
+        return weights == null ? 0 : weights.length;
+    }
 
     /**
      * Computer the value of this andrewoid.neutralnetwork.Neuron given the previousLayer and weights.
@@ -124,6 +123,10 @@ public class Neuron {
         return value;
     }
 
+    /**
+     * @param index
+     * @return the weights of the connection from the previous layer
+     */
     public double getWeight(int index) {
         return weights[index];
     }

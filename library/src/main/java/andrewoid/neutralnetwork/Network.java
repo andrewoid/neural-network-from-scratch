@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
  */
 public class Network {
 
+    public Neuron[][] getLayers() {
+        return layers;
+    }
+
     private final Neuron layers[][];
 
     public Neuron[][] getLayers()
