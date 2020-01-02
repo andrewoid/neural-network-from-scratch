@@ -1,7 +1,7 @@
 package andrewoid.neuralnetwork.digit_ui;
 
-import andrewoid.neutralnetwork.Network;
-import andrewoid.neutralnetwork.NetworkFactory;
+import andrewoid.neuralnetwork.Network;
+import andrewoid.neuralnetwork.Neuron;
 
 public class DigitInteraction {
 
