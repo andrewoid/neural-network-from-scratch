@@ -10,7 +10,6 @@ public class NeuralNetworkComponent extends JComponent {
     int space = 200;
     int space2 = 50;
     Network network;
-    Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA, Color.PINK};
 
     public NeuralNetworkComponent(Network network) {
         this.network = network;
@@ -27,11 +26,11 @@ public class NeuralNetworkComponent extends JComponent {
         for (int i = 0; i < layers.length; i++) {
             for (int j = 0; j < layers[i].length; j++) {
                 neuronValue = (int) layers[i][j].getValue();
-                neuronColor = colors[neuronValue];
+                neuronColor = new Color(neuronValue*10);
                 drawNeuron(i, j, neuronColor, g);
                 for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
                     pathWeight = (int) layers[i][j].getWeight(k);
-                    pathColor = colors[pathWeight];
+                    pathColor = new Color(pathWeight*100000);
                     drawConnection(i, j, k, pathColor, g);
                 }
             }
