@@ -78,7 +78,7 @@ public class Network {
      */
     public Neuron[] evaluate(double... inputs) {
         Neuron firstLayer[] = layers[0];
-        for (int i = 0; i < firstLayer.length && i < inputs.length; i++) {
+        for (int i = 0; i < inputs.length; i++) {
             firstLayer[i].setValue(inputs[i]);
         }
 
