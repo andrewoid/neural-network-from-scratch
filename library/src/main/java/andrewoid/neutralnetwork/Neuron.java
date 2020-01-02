@@ -11,8 +11,8 @@ public class Neuron {
     private static final double WEIGHT_UPPER = 0.5;
     private static final double WEIGHT_LOWER = 0.1;
     private int index;
-    private Neuron[] previousLayer;
-    private Neuron[] nextLayer;
+    private transient Neuron[] previousLayer;
+    private transient Neuron[] nextLayer;
     private double weights[];
     private double bias;
     private double value;
@@ -57,24 +57,8 @@ public class Neuron {
         return Math.random() * (upper - lower) + lower;
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    /**
-     * @param index
-     * @return the weights of the connection from the previous layer
-     */
-    public double getWeight(int index) {
-        return weights[index];
-    }
-
-    public double getError() {
-        return error;
+    public int getNumWeights() {
+        return weights == null ? 0 : weights.length;
     }
 
     /**
@@ -131,5 +115,37 @@ public class Neuron {
         return String.valueOf(value);
     }
 
+    public void setValue(double value) {
+        this.value = value;
+    }
 
+    public double getValue() {
+        return value;
+    }
+
+    /**
+     * @param index
+     * @return the weights of the connection from the previous layer
+     */
+    public double getWeight(int index) {
+        return weights[index];
+    }
+
+    public double getError() { return error; }
+
+    public double[] getWeights() { return weights; }
+
+    public double getBias() { return bias; }
+
+    public double getDerivative() { return derivative; }
+
+    public void setPreviousLayer(Neuron[] previousLayer)
+    {
+        this.previousLayer = previousLayer;
+    }
+
+    public void setNextLayer(Neuron[] nextLayer)
+    {
+        this.nextLayer = nextLayer;
+    }
 }

@@ -2,10 +2,9 @@ package andrewoid.neuralnetwork.MNISTReader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class IdxReader
@@ -14,13 +13,14 @@ public class IdxReader
     private String inputImagePath;
     private String inputLabelPath;
     private String outputPath;
-    private FileInputStream inImage = null;
-    private FileInputStream inLabel = null;
+    private InputStream inImage = null;
+    private InputStream inLabel = null;
     private int magicNumberImages, numberOfImages, numberOfRows,
             numberOfColumns, magicNumberLabels,
             numberOfLabels, numberOfPixels;
     private BufferedImage image;
     private int[] imgPixels;
+    private ArrayList<MNISTTrainingFile> mnistTrainingFiles = new ArrayList<>();
 
     public IdxReader(String inputImagePath, String inputLabelPath, String outputPath)
     {
@@ -68,9 +68,10 @@ public class IdxReader
                 int label = inLabel.read();
 
                 hashMap[label]++;
-                File outputfile = new File(outputPath + "/" + label + "/" + hashMap[label] + ".png");
+                File outputFile = new File(outputPath + "/" + label + "/" + hashMap[label] + ".png");
 
-                ImageIO.write(image, "png", outputfile);
+                boolean wrote = ImageIO.write(image, "png", outputFile);
+                mnistTrainingFiles.add(new MNISTTrainingFile(outputFile.getAbsoluteFile(), label));
             }
 
         } catch (FileNotFoundException e) {
@@ -102,8 +103,8 @@ public class IdxReader
     private void initializeVariables() {
         try {
 
-            inImage = new FileInputStream(inputImagePath);
-            inLabel = new FileInputStream(inputLabelPath);
+            inImage = new BufferedInputStream(new FileInputStream(inputImagePath));
+            inLabel = new BufferedInputStream(new FileInputStream(inputLabelPath));
 
             magicNumberImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
             numberOfImages = (inImage.read() << 24) | (inImage.read() << 16) | (inImage.read() << 8) | (inImage.read());
@@ -113,7 +114,7 @@ public class IdxReader
             magicNumberLabels = (inLabel.read() << 24) | (inLabel.read() << 16) | (inLabel.read() << 8) | (inLabel.read());
             numberOfLabels = (inLabel.read() << 24) | (inLabel.read() << 16) | (inLabel.read() << 8) | (inLabel.read());
 
-            image = new BufferedImage(numberOfColumns, numberOfRows, BufferedImage.TYPE_INT_ARGB);
+            image = new BufferedImage(numberOfColumns, numberOfRows, BufferedImage.TYPE_INT_RGB);
             numberOfPixels = numberOfRows * numberOfColumns;
             imgPixels = new int[numberOfPixels];
         } catch (IOException e) {
@@ -134,6 +135,11 @@ public class IdxReader
     private boolean pathExist(String outpath)
     {
         return new File(outputPath).exists();
+    }
+
+    public ArrayList<MNISTTrainingFile> getMnistTrainingFiles()
+    {
+        return mnistTrainingFiles;
     }
 
 }
