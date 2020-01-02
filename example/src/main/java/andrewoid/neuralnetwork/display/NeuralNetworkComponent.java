@@ -1,4 +1,7 @@
-package andrewoid.neutralnetwork;
+package andrewoid.neuralnetwork.display;
+
+import andrewoid.neutralnetwork.Neuron;
+import andrewoid.neutralnetwork.Network;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,8 +52,8 @@ public class NeuralNetworkComponent extends JComponent {
     private void drawConnection(int row, int column, int number, Color color, Graphics g) {
         g.setColor(color);
         g.drawLine(start + ((row - 1) * space) + size,
-                start + (number * space2) + (int)(size/2),
+                start + (number * space2) + (int) (size / 2),
                 start + ((row) * space),
-                start + (column * space2) + (int)(size/2));
+                start + (column * space2) + (int) (size / 2));
     }
 }
