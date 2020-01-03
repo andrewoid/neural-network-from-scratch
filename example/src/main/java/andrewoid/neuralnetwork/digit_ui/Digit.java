@@ -1,8 +1,7 @@
 package andrewoid.neuralnetwork.digit_ui;
 
-import andrewoid.neutralnetwork.Network;
-import andrewoid.neutralnetwork.Neuron;
-
+import andrewoid.neuralnetwork.Network;
+import andrewoid.neuralnetwork.Neuron;
 import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -121,13 +120,4 @@ public class Digit extends JPanel {
         }
         resultScreen.setText(result.toString());
     }
-
-/*    *//**
-     *
-     * @return deep copy of the array that represents which parts of the digit are selected. The selected parts of the
-     * digit should be used by the neural network to determine which number is represented
-     *//*
-    public double[] getLinesStatus() {
-        return Arrays.copyOf(linesStatus, linesStatus.length);
-    }*/
 }

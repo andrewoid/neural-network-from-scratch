@@ -2,7 +2,6 @@ package andrewoid.neuralnetwork.digit_ui;
 
 import andrewoid.neuralnetwork.Network;
 import andrewoid.neuralnetwork.NetworkFactory;
-
 import java.io.FileNotFoundException;
 
 public class DigitInteraction {
