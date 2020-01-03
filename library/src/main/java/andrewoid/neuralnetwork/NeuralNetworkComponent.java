@@ -5,10 +5,13 @@ import java.awt.*;
 
 
 public class NeuralNetworkComponent extends JComponent {
+    private static final int COLOR_RANGE = 16777215;
     int start = 25;
     int size = 10;
     int space = 200;
     int space2 = 50;
+    double weightMin = 0;
+    double weightMax = 1;
     Network network;
 
     public NeuralNetworkComponent(Network network) {
@@ -18,19 +21,31 @@ public class NeuralNetworkComponent extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Color neuronColor = Color.BLACK;
-        int neuronValue;
+        Color neuronColor;
+        int neuronColorValue;
         int pathWeight;
-        Color pathColor = Color.BLACK;
+        Color pathColor;
         Neuron[][] layers = network.getLayers();
         for (int i = 0; i < layers.length; i++) {
             for (int j = 0; j < layers[i].length; j++) {
-                neuronValue = (int) layers[i][j].getValue();
-                neuronColor = new Color(neuronValue*10);
+                for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
+                    if (weightMin > layers[i][j].getWeight(k)) {
+                        weightMin = layers[i][j].getWeight(k);
+                    }
+                    if (weightMax < layers[i][j].getWeight(k)) {
+                        weightMax = layers[i][j].getWeight(k);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < layers.length; i++) {
+            for (int j = 0; j < layers[i].length; j++) {
+                neuronColorValue = (int) layers[i][j].getValue() * COLOR_RANGE;
+                neuronColor = new Color(neuronColorValue);
                 drawNeuron(i, j, neuronColor, g);
                 for (int k = 0; k < layers[i][j].getNumWeights(); k++) {
-                    pathWeight = (int) layers[i][j].getWeight(k);
-                    pathColor = new Color(pathWeight*100000);
+                    pathWeight = (int) (((layers[i][j].getWeight(k)) - weightMin) / weightMax) * COLOR_RANGE;
+                    pathColor = new Color(pathWeight);
                     drawConnection(i, j, k, pathColor, g);
                 }
             }
@@ -48,8 +63,8 @@ public class NeuralNetworkComponent extends JComponent {
     private void drawConnection(int row, int column, int number, Color color, Graphics g) {
         g.setColor(color);
         g.drawLine(start + ((row - 1) * space) + size,
-                start + (number * space2) + (int)(size/2),
+                start + (number * space2) + (int) (size / 2),
                 start + ((row) * space),
-                start + (column * space2) + (int)(size/2));
+                start + (column * space2) + (int) (size / 2));
     }
 }
