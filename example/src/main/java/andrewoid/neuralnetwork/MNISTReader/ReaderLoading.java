@@ -13,10 +13,10 @@ public class ReaderLoading {
     public static void main(String[] args)
     {
         IdxReader reader = new IdxReader(trainingInputImagePath,trainingInputLabelPath,outputPath);
-//        reader.loadFromCompressedFilesToOutputDir();
+        reader.loadFromCompressedFilesToOutputDir();
         System.out.println("Adding the testing files now");
         reader.resetInputImageAndFilePath(testingInputImagePath, testingInputLabelPath);
         reader.loadFromCompressedFilesToOutputDir();
-        ArrayList<MNISTTrainingFile> mnistTrainingFiles = reader.getMnistTrainingFiles();
+//        ArrayList<MNISTTrainingFile> mnistTrainingFiles = reader.getMnistTrainingFiles();
     }
 }

@@ -4,22 +4,23 @@ import java.io.File;
 
 public class MNISTTrainingFile
 {
-    private File file;
-    private int value;
+    private int[] imgPixels;
+    private int label;
 
-    public MNISTTrainingFile(File file, int value)
+
+    public MNISTTrainingFile(int[] imgPixels, int label)
     {
-      this.file = file;
-      this.value = value;
+      this.imgPixels = imgPixels;
+      this.label = label;
     }
 
-    public File getFile()
+    public int[] getImgPixels()
     {
-        return file;
+        return imgPixels;
     }
 
-    public int getValue()
+    public int getLabel()
     {
-        return value;
+        return label;
     }
 }
