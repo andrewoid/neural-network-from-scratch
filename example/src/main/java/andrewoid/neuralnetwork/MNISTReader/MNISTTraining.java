@@ -1,7 +1,7 @@
 package andrewoid.neuralnetwork.MNISTReader;
 
-import andrewoid.neutralnetwork.Network;
-import andrewoid.neutralnetwork.Neuron;
+import andrewoid.neuralnetwork.Network;
+import andrewoid.neuralnetwork.Neuron;
 
 import java.util.Arrays;
 import java.util.Iterator;

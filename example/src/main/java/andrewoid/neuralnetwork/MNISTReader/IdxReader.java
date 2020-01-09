@@ -128,7 +128,13 @@ public class IdxReader
 
     public boolean areFilesLoaded()
     {
-       return new File(outputPath + "0").list().length > 0;
+        File file = new File(outputPath + "0");
+        if(file.list() !=  null) {
+            return file.list().length > 0;
+        }
+        else {
+            return false;
+        }
     }
 
     private void closeFileStreams() {
