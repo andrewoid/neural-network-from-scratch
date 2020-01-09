@@ -43,4 +43,5 @@ public class MNISTTesting {
         }
         System.out.printf("total images: %d\ncorrect images: %d\nsuccess rate: %.2f%%", totalImages, correctEvaluation, ((double) correctEvaluation)/((double) totalImages) * 100);
     }
+
 }

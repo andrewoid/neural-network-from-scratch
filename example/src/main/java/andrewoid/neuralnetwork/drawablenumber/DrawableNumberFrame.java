@@ -11,7 +11,7 @@ public class DrawableNumberFrame extends JFrame {
 
     public DrawableNumberFrame() {
         setTitle("Draw a Number");
-        setSize(600, 600);
+        setSize(780, 680);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel root = new JPanel();
