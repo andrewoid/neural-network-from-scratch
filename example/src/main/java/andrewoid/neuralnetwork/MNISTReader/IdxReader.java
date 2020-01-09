@@ -47,10 +47,6 @@ public class IdxReader
                 return null;
             }
         }
-
-        public void reset() {
-            position = 0;
-        }
     }
 
     private String inputImagePath;
