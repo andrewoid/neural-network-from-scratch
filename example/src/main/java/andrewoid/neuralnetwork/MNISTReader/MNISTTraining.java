@@ -37,8 +37,10 @@ public class MNISTTraining
         Network network;
         try {
             network = new NetworkFactory().loadFromJSON(saveFilename);
+            System.out.println("Loaded previous " + saveFilename);
         } catch (FileNotFoundException e) {
-            network =new Network(784, 15, 15, 10);
+            network =new Network(784, 32, 10);
+            System.out.println("Creating Neural Network");
         }
 
         Iterator<MNISTTrainingFile> iterator = reader.iterator();
