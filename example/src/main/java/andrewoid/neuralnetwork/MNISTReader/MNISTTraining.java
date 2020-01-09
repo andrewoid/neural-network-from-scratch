@@ -33,40 +33,39 @@ public class MNISTTraining
     public static void main(String args[])
     {
         IdxReader reader = new IdxReader(trainingInputImagePath,trainingInputLabelPath,trainingOutputPath);
-        if(reader.areFilesLoaded())
+
+        Network network = new Network(784, 1600, 1600, 10);
+        Neuron outputs[];
+
+        Iterator<MNISTTrainingFile> iterator = reader.iterator();
+        while(iterator.hasNext())
         {
-            Network network = new Network(784, 15, 15, 10);
-            Neuron outputs[];
-
-            Iterator<MNISTTrainingFile> iterator = reader.iterator();
-            while(iterator.hasNext())
-            {
-                MNISTTrainingFile next = iterator.next();
-                network.train(next.getImgPixelsAsDoubles(), expectedOutputs[next.getLabel()], 0.3);
-            }
-
-
-            reader.resetInputImageAndFilePath(testingInputImagePath, testingInputLabelPath, testingOutputPath);
-            Iterator<MNISTTrainingFile> iterator2 = reader.iterator();
-
-            while(iterator2.hasNext())
-            {
-                MNISTTrainingFile next = iterator2.next();
-                double[] imgInput = next.getImgPixelsAsDoubles();
-                outputs = network.evaluate(imgInput);
-                System.out.print(Arrays.toString(imgInput));
-                System.out.print(" = ");
-                for (int i = 0; i < outputs.length; i++) {
-                    double value = outputs[i].getValue();
-                    if (value > 0.10) {
-                        System.out.print(i);
-                        System.out.print(" ");
-                    }
-                }
-                System.out.println();
-            }
-
-            network.saveToJSON("network.json");
+            MNISTTrainingFile next = iterator.next();
+            network.train(next.getImgPixelsAsDoubles(), expectedOutputs[next.getLabel()], 0.3);
         }
+
+
+        reader.resetInputImageAndFilePath(testingInputImagePath, testingInputLabelPath, testingOutputPath);
+        Iterator<MNISTTrainingFile> iterator2 = reader.iterator();
+
+        while(iterator2.hasNext())
+        {
+            MNISTTrainingFile next = iterator2.next();
+            double[] imgInput = next.getImgPixelsAsDoubles();
+            outputs = network.evaluate(imgInput);
+            System.out.print(Arrays.toString(imgInput));
+            System.out.print(" = ");
+            for (int i = 0; i < outputs.length; i++) {
+                double value = outputs[i].getValue();
+                if (value > 0.10) {
+                    System.out.print(i);
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+
+        network.saveToJSON("network.json");
     }
+
 }
