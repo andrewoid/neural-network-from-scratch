@@ -1,15 +1,31 @@
 package andrewoid.neuralnetwork.drawablenumber;
+
+import andrewoid.neuralnetwork.Network;
+import andrewoid.neuralnetwork.NetworkFactory;
+
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Dimension;
+import java.io.FileNotFoundException;
 
 public class DrawableNumberFrame extends JFrame {
 
-    private DrawingComponent drawingComponent = new DrawingComponent();
+    private Network network = null;
+    private DrawingComponent drawingComponent;
+    private DrawableEvaluation evaluation;
 
     public DrawableNumberFrame() {
+        try {
+            network = new NetworkFactory().loadFromJSON("network.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        JPanel outputPanel = new JPanel();
+        JLabel outputLabel = new JLabel("Here is Your Number");
+        evaluation = new DrawableEvaluation(network, outputLabel);
+        drawingComponent = new DrawingComponent(evaluation);
+
         setTitle("Draw a Number");
         setSize(780, 680);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -27,9 +43,7 @@ public class DrawableNumberFrame extends JFrame {
         drawablePanel.add(drawableLabel, BorderLayout.NORTH);
         drawablePanel.add(drawingComponent, BorderLayout.CENTER);
 
-        JPanel outputPanel = new JPanel();
         outputPanel.setBackground(Color.YELLOW);
-        JLabel outputLabel = new JLabel("Here is Your Number");
         outputLabel.setFont(new Font("Sans Serif", Font.BOLD, 16));
         outputPanel.add(outputLabel);
 

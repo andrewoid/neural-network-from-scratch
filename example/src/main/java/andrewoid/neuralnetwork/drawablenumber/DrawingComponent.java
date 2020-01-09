@@ -15,8 +15,10 @@ public class DrawingComponent extends JComponent {
     private Point startPoint;
     private Point endPoint;
     private Shape line;
+    private DrawableEvaluation evaluation;
 
-    public DrawingComponent() {
+    public DrawingComponent(DrawableEvaluation evaluation) {
+        this.evaluation = evaluation;
         MouseInputAdapter mouseInputAdapter = new MouseInputAdapter() {
             public void mousePressed(MouseEvent e) {
                 startPoint = e.getPoint();
@@ -27,6 +29,11 @@ public class DrawingComponent extends JComponent {
                 line = new Line2D.Double(startPoint, endPoint);
                 startPoint = endPoint;
                 drawLines();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                evaluation.evaluate(resizeImage());
             }
         };
 
@@ -62,11 +69,7 @@ public class DrawingComponent extends JComponent {
         }
     }
 
-    private Image getImage() {
-        return buffImage;
-    }
-
-    public Image resizeImage (){
+    public BufferedImage resizeImage (){
         resize.getGraphics().drawImage(buffImage,0,0,28,28,null);
         return resize;
     }
