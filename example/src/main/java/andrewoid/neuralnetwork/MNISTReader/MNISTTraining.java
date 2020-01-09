@@ -35,7 +35,7 @@ public class MNISTTraining
         IdxReader reader = new IdxReader(trainingInputImagePath,trainingInputLabelPath,trainingOutputPath);
         if(reader.areFilesLoaded())
         {
-            Network network = new Network(7, 15, 15, 10);
+            Network network = new Network(784, 15, 15, 10);
             Neuron outputs[];
 
             Iterator<MNISTTrainingFile> iterator = reader.iterator();
