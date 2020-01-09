@@ -47,6 +47,10 @@ public class IdxReader
                 return null;
             }
         }
+
+        public void reset() {
+            position = 0;
+        }
     }
 
     private String inputImagePath;
@@ -67,10 +71,11 @@ public class IdxReader
         this.outputPath = outputPath;
     }
 
-    public void resetInputImageAndFilePath(String inputImagePath, String inputLabelPath)
+    public void resetInputImageAndFilePath(String inputImagePath, String inputLabelPath, String outputPath)
     {
         this.inputImagePath = inputImagePath;
         this.inputLabelPath = inputLabelPath;
+        this.outputPath = outputPath;
     }
 
     public Iterator<MNISTTrainingFile> iterator() {
@@ -82,7 +87,8 @@ public class IdxReader
     * Resource I utilized to decompress the files:
     * https://stackoverflow.com/questions/17279049/reading-a-idx-file-type-in-java
     * */
-    public void loadFromCompressedFilesToOutputDir() {
+    public void loadFromCompressedFilesToOutputDir(boolean saveUncompressedToFile)
+    {
 
 
         if(!pathExist(outputPath)) { createOutputDirectories(outputPath); }
@@ -99,7 +105,9 @@ public class IdxReader
             while(iterator.hasNext())
             {
                 MNISTTrainingFile next = iterator.next();
-                writeIndividualFile(hashMap, next.getLabel());
+                if(saveUncompressedToFile) {
+                    writeIndividualFile(hashMap, next.getLabel());
+                }
             }
 
         }  finally {
@@ -120,6 +128,11 @@ public class IdxReader
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+
+    public boolean areFilesLoaded()
+    {
+       return new File(outputPath + "0").list().length > 0;
     }
 
     private void closeFileStreams() {
