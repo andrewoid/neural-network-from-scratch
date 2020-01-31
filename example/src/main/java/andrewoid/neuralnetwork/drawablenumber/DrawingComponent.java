@@ -2,23 +2,23 @@ package andrewoid.neuralnetwork.drawablenumber;
 
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputAdapter;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 public class DrawingComponent extends JComponent {
 
     private BufferedImage buffImage = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage resize = new BufferedImage(28, 28, BufferedImage.TYPE_INT_ARGB);
     private Point startPoint;
     private Point endPoint;
     private Shape line;
+    private DrawableEvaluation evaluation;
 
-    public DrawingComponent() {
+    public DrawingComponent(DrawableEvaluation evaluation) {
+        this.evaluation = evaluation;
         MouseInputAdapter mouseInputAdapter = new MouseInputAdapter() {
             public void mousePressed(MouseEvent e) {
                 startPoint = e.getPoint();
@@ -30,6 +30,11 @@ public class DrawingComponent extends JComponent {
                 startPoint = endPoint;
                 drawLines();
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                evaluation.evaluate(resizeImage());
+            }
         };
 
         addMouseListener(mouseInputAdapter);
@@ -39,6 +44,7 @@ public class DrawingComponent extends JComponent {
     public void drawLines() {
         Graphics2D g = (Graphics2D) buffImage.getGraphics();
         g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(30));
         g.draw(line);
         repaint();
     }
@@ -47,6 +53,9 @@ public class DrawingComponent extends JComponent {
         Graphics2D g2d = (Graphics2D) buffImage.getGraphics();
         g2d.setBackground(new Color(0, 0, 0, 0));
         g2d.clearRect(buffImage.getMinX(), buffImage.getMinY(), buffImage.getWidth(), buffImage.getHeight());
+        g2d = (Graphics2D) resize.getGraphics();
+        g2d.setBackground(new Color(0, 0, 0, 0));
+        g2d.clearRect(resize.getMinX(), resize.getMinY(), resize.getWidth(), resize.getHeight());
         repaint();
     }
 
@@ -55,6 +64,15 @@ public class DrawingComponent extends JComponent {
         super.paintComponent(graphics);
         if (buffImage != null) {
             graphics.drawImage(buffImage, 0, 0, null);
+            resizeImage();
+            graphics.drawImage(resize, getWidth()-28,0, null);
         }
     }
+
+    public BufferedImage resizeImage (){
+        resize.getGraphics().drawImage(buffImage,0,0,28,28,null);
+        return resize;
+    }
+
+
 }
