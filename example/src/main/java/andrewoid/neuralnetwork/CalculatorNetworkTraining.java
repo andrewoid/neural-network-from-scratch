@@ -1,7 +1,7 @@
 package andrewoid.neuralnetwork;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Demonstration to train a Network to recognize calculator digits. Calculator digits have 7 possible inputs and 10 possible outputs</br>
@@ -34,30 +34,9 @@ public class CalculatorNetworkTraining {
             {1, 1, 1, 1, 0, 1, 0}, // 9
     };
 
-    private static final double expectedOutputs[][] = new double[][]{
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, // 0
-            {0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, // 1
-            {0, 0, 1, 0, 0, 0, 0, 0, 0, 0}, // 2
-            {0, 0, 0, 1, 0, 0, 0, 0, 0, 0}, // 3
-            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, // 4
-            {0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, // 5
-            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0}, // 6
-            {0, 0, 0, 0, 0, 0, 0, 1, 0, 0}, // 7
-            {0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, // 8
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 9
-    };
-
-    public static void main(String args[])
-    {
-        Network network = new Network(7, 15, 15, 10);
+    public static void main(String args[]) throws FileNotFoundException {
+        Network network = new NetworkFactory().loadFromJSON("network.json");
         Neuron outputs[];
-        Random random = new Random();
-
-        // train the network on random input and output sets.
-        for (int i = 0; i < 40000; i++) {
-            int set = random.nextInt(inputs.length);
-            network.train(inputs[set], expectedOutputs[set], 0.3);
-        }
 
         // test the network on the input sets, printing out everything that evaluates to greater than 10%
         for (double input[] : inputs) {
@@ -74,5 +53,4 @@ public class CalculatorNetworkTraining {
             System.out.println();
         }
     }
-
 }
